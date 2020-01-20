@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class Auth extends Component {
   render() {
-    return null;
+    return <h2>Auth page</h2>;
   }
 }
 
