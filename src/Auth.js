@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {authorizeUser} from "./AuthorizeApi";
+import { Redirect } from 'react-router-dom';
 
 class Auth extends Component {
   state = {
@@ -15,6 +16,9 @@ class Auth extends Component {
 
   render() {
     const { email, password, isAuthorized } = this.state;
+
+    if (isAuthorized) return <Redirect to="/" />;
+
     const hasError = isAuthorized !== null && !isAuthorized;
     return (
       <form>

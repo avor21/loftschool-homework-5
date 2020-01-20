@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {addListener, removeListener, isAuthorized} from './AuthorizeApi';
-import {Link, Route, Switch} from "react-router-dom";
+import {Link, Route, Switch, Redirect} from "react-router-dom";
 import Home from "./Home";
 import Auth from "./Auth";
 import Private from "./Private";
@@ -38,9 +38,10 @@ class App extends Component {
 
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/auth" component={Auth} />
-          <Route path="/private" component={Private} />
+          <Route path="/auth" render={() => (!isAuthorized ? <Auth /> : <Redirect to="/" />)} />
+          <Route path="/private" render={() => (isAuthorized ? <Private /> : <Redirect to="/auth" />)} />
           <Route path="/public" component={Public} />
+          <Route path="*" render={() => <Redirect to="/" />} />
         </Switch>
       </div>
     );
