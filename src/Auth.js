@@ -35,7 +35,7 @@ class Auth extends Component {
                  value={password}
                  onChange={this.inputHandler} />
         </div>
-        { hasError && <p>Неверный Email и/или пароль</p> }
+        { hasError && <p className="error">Неверный Email и/или пароль</p> }
         <button onClick={this.handleSubmit}>Submit</button>
       </form>
     );
@@ -43,7 +43,7 @@ class Auth extends Component {
 
   handleSubmit = (event) => {
     const { email, password } = this.state;
-    event.preventDefault();
+    event && event.preventDefault();
     this.setState({ isAuthorized: authorizeUser(email, password) });
   }
 }
